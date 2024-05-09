@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import { mergeAllWordsFromObject } from '@/utils/words'
 import { Player, Team } from '@/lib/game'
 import { CrocodileGame } from '@/games/crocodile/game'
 import dbWords from '@/db/crocodile/words.json'
 
-const WORDS = dbWords as unknown as string[]
+const WORDS = mergeAllWordsFromObject(dbWords as unknown as Record<string, string[]>)
 const WORD_TIMEOUT_SEC = 60
 
 export default function Game() {

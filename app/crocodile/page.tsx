@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import crocodileImg from '@/public/crocodile.webp'
+import crocodileImg from '@/public/games/crocodile.webp'
 
 export default function Home() {
   return (

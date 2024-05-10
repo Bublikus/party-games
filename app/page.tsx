@@ -21,6 +21,7 @@ export default function Home() {
                 objectFit="contain"
                 className="rounded-xl"
                 crossOrigin="anonymous"
+                priority
               />
               <p className="text-sm mt-1">{game.name}</p>
             </Link>

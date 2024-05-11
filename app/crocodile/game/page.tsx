@@ -6,7 +6,6 @@ import { translateLevelName } from '@/utils/game'
 import { checkDuplicates, filterDuplicatesInLevels } from '@/utils/words'
 import { CrocodileGame } from '@/games/crocodile/game'
 
-let isWordsLoaded = false
 let WORDS: Record<string, string[]> = {}
 
 export default function Game() {
@@ -25,13 +24,8 @@ export default function Game() {
   }
 
   useEffect(() => {
-    if (isWordsLoaded) return
-
     import('@/db/crocodile/words.json').then((dbWords) => {
-      if (isWordsLoaded) return
-
       // set words
-      isWordsLoaded = true
       const rawWords = dbWords.default as unknown as Record<string, string[]>
       const filteredLevels = filterDuplicatesInLevels(rawWords)
       WORDS = {

@@ -5,7 +5,7 @@ export class CrocodileGame extends Game {
   private currentWord: string = ''
   private currentTeam: Team | null = null
 
-  constructor(words: string[], teams: Team[]) {
+  constructor(words: string[], teams: Team[] = []) {
     super()
     teams.forEach((team) => this.addTeam(team))
     this.wordBank = new WordBank(words)

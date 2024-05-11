@@ -2,22 +2,29 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { mergeAllWordsFromObject } from '@/utils/words'
+import { translateLevelName } from '@/utils/game'
 import { CrocodileGame } from '@/games/crocodile/game'
 import dbWords from '@/db/crocodile/words.json'
 
-const WORDS = mergeAllWordsFromObject(dbWords as unknown as Record<string, string[]>)
+const WORDS = dbWords as unknown as Record<string, string[]>
 
 export default function Game() {
   const gameRef = useRef<CrocodileGame>()
   const [word, setWord] = useState<string>()
+  const [level, setLevel] = useState<string>(Object.keys(dbWords)[0])
 
   const regenerateWord = () => {
     setWord(gameRef.current?.regenerateWord())
   }
 
+  const handleLevelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setLevel(event.target.value)
+    gameRef.current?.setWords(WORDS[event.target.value])
+    setWord(gameRef.current?.getWord())
+  }
+
   useEffect(() => {
-    gameRef.current = new CrocodileGame(WORDS)
+    gameRef.current = new CrocodileGame(WORDS[level])
     gameRef.current?.startGame()
     setWord(gameRef.current?.getWord())
 
@@ -31,6 +38,18 @@ export default function Game() {
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-800">{word}</h1>
       </div>
+
+      <select
+        value={level}
+        onChange={handleLevelChange}
+        className="bg-white text-gray-800 font-bold py-2 px-4 rounded"
+      >
+        {Object.keys(dbWords).map((key) => (
+          <option key={key} value={key} className="text-gray-800">
+            {translateLevelName(key)}
+          </option>
+        ))}
+      </select>
 
       <div className="flex items-center gap-4">
         <Link

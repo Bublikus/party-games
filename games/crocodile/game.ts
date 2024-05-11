@@ -27,6 +27,11 @@ export class CrocodileGame extends Game {
     console.log(`It's ${this.currentTeam?.name}'s turn. The word is: ${this.currentWord}`)
   }
 
+  setWords(words: string[]) {
+    this.wordBank = new WordBank(words)
+    this.computeTurn()
+  }
+
   getWord(): string {
     return this.currentWord
   }

@@ -16,17 +16,16 @@
   }
 }
 
-* {
+button,
+input,
+select,
+textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
 

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { translateLevelName } from '@/utils/game'
-import { checkDuplicates, filterDuplicatesInLevels } from '@/utils/words'
+import { checkDuplicates, filterDuplicatesInLevels, filterWordDuplicates } from '@/utils/words'
 import { CrocodileGame } from '@/games/crocodile/game'
 
 let WORDS: Record<string, string[]> = {}
@@ -11,16 +11,38 @@ let WORDS: Record<string, string[]> = {}
 export default function Game() {
   const gameRef = useRef<CrocodileGame>()
   const [word, setWord] = useState<string>()
-  const [level, setLevel] = useState<string>()
+  const [levels, setLevels] = useState<string[]>([])
 
   const regenerateWord = () => {
     setWord(gameRef.current?.regenerateWord())
   }
 
-  const handleLevelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setLevel(event.target.value)
-    gameRef.current?.setWords(WORDS[event.target.value])
-    setWord(gameRef.current?.getWord())
+  const handleCheckboxChange = (key: string) => {
+    setLevels((prevLevels) => {
+      let newLevels: string[] = []
+
+      if (key === 'all') {
+        newLevels = prevLevels.includes(key) ? [] : Object.keys(WORDS)
+      } else if (prevLevels.includes(key)) {
+        newLevels = prevLevels.filter((level) => level !== key && level !== 'all')
+      } else {
+        newLevels = [...prevLevels, key]
+      }
+      // select "all" if all levels are selected
+      if (Object.keys(WORDS).every((level) => level === 'all' || newLevels.includes(level))) {
+        newLevels = Object.keys(WORDS)
+      }
+
+      // generate new word base on new levels
+      const mergedLevels = newLevels.includes('all')
+        ? WORDS['all']
+        : newLevels.flatMap((level) => WORDS[level])
+
+      gameRef.current?.setWords(filterWordDuplicates(mergedLevels))
+      setWord(gameRef.current?.getWord())
+
+      return newLevels
+    })
   }
 
   useEffect(() => {
@@ -54,11 +76,11 @@ export default function Game() {
       })
 
       // set game
-      const initLevel = Object.keys(WORDS)[0]
-      setLevel(initLevel)
+      const initLevels = [Object.keys(WORDS)[0]]
+      setLevels(initLevels)
       gameRef.current = new CrocodileGame()
       gameRef.current?.startGame()
-      gameRef.current?.setWords(WORDS[initLevel])
+      gameRef.current?.setWords(WORDS[initLevels[0]])
       setWord(gameRef.current?.getWord())
     })
 
@@ -73,17 +95,28 @@ export default function Game() {
         <h1 className="text-2xl font-bold text-gray-800">{word || '...'}</h1>
       </div>
 
-      <select
-        value={level}
-        onChange={handleLevelChange}
-        className="bg-white text-gray-800 font-bold py-2 px-4 rounded"
-      >
-        {Object.keys(WORDS).map((key) => (
-          <option key={key} value={key} className="text-gray-800">
-            {translateLevelName(key)}
-          </option>
-        ))}
-      </select>
+      <div className="dropdown">
+        <button type="button" className="bg-white text-gray-800 py-2 px-4 rounded cursor-pointer">
+          {levels.includes('all')
+            ? translateLevelName('all')
+            : levels.map((level) => translateLevelName(level)).join(', ') || '...'}
+        </button>
+
+        <div className="dropdown-content">
+          {Object.keys(WORDS).map((key) => (
+            <button
+              key={key}
+              onClick={() => handleCheckboxChange(key)}
+              className="w-full flex items-center py-2 px-4 hover:bg-gray-100 text-gray-800"
+            >
+              <div
+                className={`h-4 w-4 border-2 rounded ${levels.includes(key) ? 'bg-blue-500' : 'bg-white'}`}
+              />
+              <span className="ml-2">{translateLevelName(key)}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="flex items-center gap-4">
         <Link

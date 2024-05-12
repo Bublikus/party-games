@@ -3,7 +3,7 @@ export const filterWordDuplicates = (words: string[]): string[] => {
 }
 
 export const mergeAllWordsFromObject = (words: Record<string, string[]>): string[] => {
-  return Object.values(words).flat()
+  return filterWordDuplicates(Object.values(words).flat())
 }
 
 export const filterDuplicatesInLevels = (

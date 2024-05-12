@@ -23,6 +23,18 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
+button,
+[role='button'],
+input[type='submit'],
+input[type='reset'],
+input[type='button'],
+input[type='checkbox'],
+input[type='radio'],
+label,
+select {
+  cursor: pointer;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
@@ -49,5 +61,20 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* Dropdown */
+
+.dropdown {
+  @apply relative;
+
+  .dropdown-content {
+    @apply absolute hidden bg-white shadow-lg z-10 rounded-md py-1 mt-2;
+    @apply left-1/2 transform -translate-x-1/2;
+  }
+
+  &:focus-within .dropdown-content {
+    @apply block;
   }
 }

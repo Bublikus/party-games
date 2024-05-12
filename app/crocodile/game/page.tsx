@@ -28,6 +28,7 @@ export default function Game() {
       easy: import('@/db/crocodile/easy.json'),
       medium: import('@/db/crocodile/medium.json'),
       hard: import('@/db/crocodile/hard.json'),
+      phrases: import('@/db/crocodile/phrases.json'),
     }
 
     Promise.allSettled(Object.values(wordLevelPromises)).then((results) => {

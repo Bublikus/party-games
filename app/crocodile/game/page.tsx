@@ -24,13 +24,27 @@ export default function Game() {
   }
 
   useEffect(() => {
-    import('@/db/crocodile/words.json').then((dbWords) => {
+    const wordLevelPromises = {
+      easy: import('@/db/crocodile/easy.json'),
+      medium: import('@/db/crocodile/medium.json'),
+      hard: import('@/db/crocodile/hard.json'),
+    }
+
+    Promise.allSettled(Object.values(wordLevelPromises)).then((results) => {
+      // get words
+      const dbWords = results.reduce<Record<string, string[]>>((acc, result, index) => {
+        if (result.status === 'fulfilled') {
+          const key = Object.keys(wordLevelPromises)[index]
+          acc[key] = result.value.default
+        }
+        return acc
+      }, {})
+
       // set words
-      const rawWords = dbWords.default as unknown as Record<string, string[]>
-      const filteredLevels = filterDuplicatesInLevels(rawWords)
+      const filteredLevels = filterDuplicatesInLevels(dbWords)
       WORDS = {
         ...filteredLevels,
-        all: Object.values(rawWords).flat(),
+        all: Object.values(dbWords).flat(),
       }
 
       // check levels

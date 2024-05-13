@@ -74,6 +74,7 @@ body {
     @apply left-1/2 transform -translate-x-1/2;
   }
 
+  &:has(:focus) .dropdown-content,
   &:focus-within .dropdown-content {
     @apply block;
   }

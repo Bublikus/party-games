@@ -97,12 +97,12 @@ export default function Game() {
         <h1 className="text-2xl font-bold text-gray-800 text-balance">{word || '...'}</h1>
       </div>
 
-      <div className="dropdown">
-        <button type="button" className="bg-white text-gray-800 py-2 px-4 rounded cursor-pointer">
+      <div role="button" className="dropdown" tabIndex={0} aria-label="Level">
+        <div className="bg-white text-gray-800 py-2 px-4 rounded cursor-pointer">
           {levels.includes('all')
             ? translateLevelName('all')
             : levels.map((level) => translateLevelName(level)).join(', ') || '...'}
-        </button>
+        </div>
 
         <div className="dropdown-content">
           {Object.keys(wordsRef.current).map((key) => (

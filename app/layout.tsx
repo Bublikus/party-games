@@ -21,6 +21,19 @@ export const metadata: Metadata = {
     'online',
     'crocodile',
   ],
+  openGraph: {
+    title: 'Party Games',
+    description: 'A collection of cool and interactive games designed for party, friends, and fun.',
+    type: 'website',
+    images: [
+      {
+        url: isProd ? '/party-games/android-chrome-512x512.png' : '',
+        width: 512,
+        height: 512,
+        alt: 'Party Games',
+      },
+    ],
+  },
   manifest: isProd ? '/party-games/manifest.json' : '/manifest.json',
 }
 

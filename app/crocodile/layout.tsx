@@ -10,5 +10,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <main className="grid w-full min-h-screen bg-[#7BECE9] p-6">{children}</main>
+  return (
+    <main className="grid w-full min-h-screen bg-gradient-to-b from-[#9efdfb] from-40% to-[#7BECE9] to-60% p-6">
+      {children}
+    </main>
+  )
 }

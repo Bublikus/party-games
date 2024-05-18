@@ -4,6 +4,8 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const isProd = process.env.NODE_ENV === 'production'
+
 export const metadata: Metadata = {
   title: 'Party Games',
   description:
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     'online',
     'crocodile',
   ],
-  manifest: '/manifest.webmanifest',
+  manifest: isProd ? '/party-games/manifest.webmanifest' : '/manifest.webmanifest',
 }
 
 export default function RootLayout({

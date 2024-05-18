@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     'online',
     'crocodile',
   ],
-  manifest: '/manifest.webmanifest',
 }
 
 export default function RootLayout({

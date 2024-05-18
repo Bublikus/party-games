@@ -1,7 +1,7 @@
 {
   "name": "Party Games",
-  "short_name": "party-games",
-  "description": "A collection of party games to play with friends",
+  "short_name": "Party Games",
+  "description": "A collection of cool and interactive games designed for party, friends, and fun.",
   "theme_color": "#8936FF",
   "background_color": "#2EC6FE",
   "display": "fullscreen",

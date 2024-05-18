@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     'online',
     'crocodile',
   ],
-  manifest: isProd ? '/party-games/manifest.webmanifest' : '/manifest.webmanifest',
+  manifest: isProd ? '/party-games/manifest.json' : '/manifest.json',
 }
 
 export default function RootLayout({
@@ -34,6 +34,7 @@ export default function RootLayout({
     <html lang="uk">
       <head>
         <meta name="theme-color" content="#8936FF" />
+        <link rel="manifest" href={isProd ? '/party-games/manifest.json' : '/manifest.json'} />
       </head>
       <body className={inter.className}>{children}</body>
     </html>

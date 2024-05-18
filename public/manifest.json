@@ -29,7 +29,6 @@
       "src": "android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      // @ts-ignore
       "form_factor": "narrow",
       "label": "Party Games"
     },
@@ -37,7 +36,6 @@
       "src": "android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      // @ts-ignore
       "form_factor": "wide",
       "label": "Party Games"
     }

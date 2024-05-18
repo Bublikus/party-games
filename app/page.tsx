@@ -18,9 +18,9 @@ export default function Home() {
                 alt={game.name}
                 width={100}
                 height={100}
-                objectFit="contain"
                 className="rounded-xl"
                 crossOrigin="anonymous"
+                style={{ width: 100, height: 100 }}
                 priority
               />
               <p className="text-sm mt-1">{game.name}</p>

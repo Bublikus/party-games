@@ -32,7 +32,6 @@ export default function RootLayout({
     <html lang="uk">
       <head>
         <meta name="theme-color" content="#8936FF" />
-        <link rel="manifest" href="/manifest.webmanifest" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>

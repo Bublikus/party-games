@@ -20,13 +20,6 @@ export const metadata: Metadata = {
     'online',
     'crocodile',
   ],
-  icons: [
-    {
-      rel: 'icon',
-      type: 'image/x-icon',
-      url: '/favicon.ico',
-    },
-  ],
 }
 
 export default function RootLayout({
@@ -36,6 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
+      <head>
+        <meta name="theme-color" content="#8936FF" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )

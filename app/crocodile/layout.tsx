@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Crocodile Game',
-  description: 'Crocodile Game: Show your acting skills and have fun with friends and family.',
+  description: 'Show your acting skills and have fun with friends and family.',
 }
 
 export default function RootLayout({

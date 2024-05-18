@@ -123,7 +123,7 @@ export default function Game() {
       <div className="flex items-center gap-4">
         <Link
           href="/crocodile"
-          className="bg-gray-400 text-white font-bold py-2 px-4 rounded hover:bg-gray-500 transition duration-300"
+          className="bg-gray-400 text-gray-950 font-bold py-2 px-4 rounded hover:bg-gray-500 transition duration-300"
         >
           Назад
         </Link>
@@ -131,7 +131,7 @@ export default function Game() {
         <button
           type="button"
           onClick={regenerateWord}
-          className="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition duration-300"
+          className="bg-green-500 text-gray-950 font-bold py-2 px-4 rounded hover:bg-green-600 transition duration-300"
         >
           Рандом
         </button>

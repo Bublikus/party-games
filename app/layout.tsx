@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const appUrl = process.env.APP_URL
 
-const isProd = process.env.NODE_ENV === 'production'
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Party Games',
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: isProd ? '/party-games/android-chrome-512x512.png' : '',
+        url: appUrl ? `${appUrl}/android-chrome-512x512.png` : '',
         width: 512,
         height: 512,
         alt: 'Party Games',
       },
     ],
   },
-  manifest: isProd ? '/party-games/manifest.json' : '/manifest.json',
+  manifest: `${appUrl}/manifest.json`,
 }
 
 export default function RootLayout({
@@ -46,7 +46,7 @@ export default function RootLayout({
     <html lang="uk">
       <head>
         <meta name="theme-color" content="#8936FF" />
-        <link rel="manifest" href={isProd ? '/party-games/manifest.json' : '/manifest.json'} />
+        <link rel="manifest" href={`${appUrl}/manifest.json`} />
       </head>
       <body className={inter.className}>{children}</body>
     </html>

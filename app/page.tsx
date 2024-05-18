@@ -4,7 +4,7 @@ import { GAMES } from '@/constants/games'
 
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center gap-10 p-4">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-4">
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-center text-2xl font-bold">Ігри</h1>
       </div>
